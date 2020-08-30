@@ -1,18 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public abstract class PickupObject : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider collider)
+
+    protected abstract void PickUpEffect(GameObject player);
+
+    protected Collider objectCollider;
+    protected Renderer objectRenderer;
+
+    void Start()
     {
-        if (collider.gameObject.tag == "Player")
+        objectRenderer = GetComponent<Renderer>();
+        objectCollider = GetComponent<Collider>();
+
+        // Set the collider to Trigger
+        if (objectCollider != null)
         {
-            PickUpEffect(collider.gameObject);
-            Destroy(gameObject);
+            objectCollider.isTrigger = true;
+            Debug.Log("Object Collider Trigger is turned on.");
+        }
+        else 
+        {
+            Debug.Log("PickupObject Collider not found.");
         }
     }
 
-    protected abstract void PickUpEffect(GameObject player); 
-
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.CompareTag("Player"))
+        {
+            PickUpEffect(collider.gameObject);
+        }
+    }
 }
