@@ -3,8 +3,13 @@
 public class SpeedPowerUpObject : PickupObject
 {
 
+    [Range(1.0f, 3.0f)]
     public float speedMultiplier = 2f;
+
+    [Range(2.0f, 15.0f)]
     public float speedUpDuration = 5f;
+
+    [Range(2.0f, 15.0f)]
     public float respawnDuration = 10f;
 
     private float timeOfTrigger;
@@ -25,7 +30,7 @@ public class SpeedPowerUpObject : PickupObject
         base.objectRenderer.enabled = true;
         base.objectCollider.enabled = true;
         isDespawned = false;
-        Debug.Log("Speed up Powerup respawned.");
+        Debug.Log("Speed up PowerUp respawned.");
     }
 
     private void Activate(GameObject player) 

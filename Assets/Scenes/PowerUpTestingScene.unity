@@ -861,9 +861,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b249aceaf6ac74b8b075dbe00df5c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 3.5
-  speedUpDuration: 5
-  respawnDuration: 6
+  speedMultiplier: 2
+  speedUpDuration: 6.02
+  respawnDuration: 11.3
 --- !u!1 &1093742973
 GameObject:
   m_ObjectHideFlags: 0
