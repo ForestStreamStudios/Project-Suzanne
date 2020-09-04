@@ -12,26 +12,15 @@ public class Cell
     public bool visited = false;
 
     public GameObject prefab;
-    public List<Cell> neighbors = new List<Cell>();
     public Cell[] directions = new Cell[4];
     #endregion
 
     #region Methods
-    /*public void CalculateWalls()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            if (walls[i] == false)
-            {
-                GameObject wall = prefab.transform.GetChild(1).GetChild(i).gameObject;
 
-                wall.SetActive(false);
-                MazeGenerator.deleteCell.Add(wall);
-            }
-        }
-    }*/
-    public Cell CheckNeighbors()
+    public Cell GetRandomNeighbor()
     {
+        List<Cell> neighbors = new List<Cell>();
+
         if (Index(x, z - 1) != -1)
         {
             directions[0] = MazeGenerator.grid[Index(x, z - 1)];
@@ -74,15 +63,6 @@ public class Cell
             return -1;
         }
         return i + j * MazeGenerator.cols;
-    }
-    public int CountWalls() {
-        int res = 0;
-        foreach(bool i in walls) {
-            if(i)
-                res++;
-        }
-
-        return res;
     }
     #endregion
 }

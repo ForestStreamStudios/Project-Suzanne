@@ -17,11 +17,8 @@ public class MazeGenerator : MonoBehaviour
     public static List<Cell> grid = new List<Cell>();
     public static List<Cell> stack = new List<Cell>();
     public static List<Cell> correctPath = new List<Cell>();
-    public static List<GameObject> deleteCell = new List<GameObject>();
     private Cell current;
     private Cell next;
-    private int pathIndex = 0;
-    private bool isPath = false;
     #endregion
 
     #region Methods
@@ -81,35 +78,19 @@ public class MazeGenerator : MonoBehaviour
     private void MazeLogic()
     {
         current.visited = true;
-        //Step 1
-        next = current.CheckNeighbors();
-        current.neighbors = new List<Cell>();
+
+        next = current.GetRandomNeighbor();
+
         if (next != null)
         {
-            next.visited = true;
-            //Step 2
             stack.Add(current);
-            //Step 3
             RemoveWalls(current, next);
-            //Step 4
             current = next;
         }
         else if (stack.Count > 0)
         {
             current = stack[stack.Count - 1];
             stack.RemoveAt(stack.Count - 1);
-        }
-        else
-        {
-            foreach (GameObject go in deleteCell)
-            {
-                Destroy(go);
-            }
-            if (pathIndex < correctPath.Count - 1)
-            {
-                pathIndex++;
-                Debug.Log(pathIndex);
-            }
         }
     }
     private void RemoveWalls(Cell a, Cell b)
@@ -136,18 +117,6 @@ public class MazeGenerator : MonoBehaviour
         {
             a.walls[1] = false;
             b.walls[3] = false;
-        }
-    }
-
-    private void CorrectPath()
-    {
-        if (isPath == false && current.x == cols - 1 && current.z == rows - 1)
-        {
-            for (int i = 0; i < stack.Count; i++)
-            {
-                correctPath.Add(stack[i]);
-            }
-            isPath = true;
         }
     }
     #endregion
