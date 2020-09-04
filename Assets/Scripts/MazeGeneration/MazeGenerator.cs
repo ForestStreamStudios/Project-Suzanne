@@ -11,7 +11,9 @@ public class MazeGenerator : MonoBehaviour
     public static int cols, rows;
 
     [Header("Cell Variables")]
-    public GameObject cellPrefab;
+    public float cellSize = 1;
+    public GameObject[] cellPrefabs;
+    public Quaternion[] cellPrefabsRotations;
     public static List<Cell> grid = new List<Cell>();
     public static List<Cell> stack = new List<Cell>();
     public static List<Cell> correctPath = new List<Cell>();
@@ -31,6 +33,8 @@ public class MazeGenerator : MonoBehaviour
         {
             MazeLogic();
         } while (stack.Count > 0);
+
+        SetupWalls();
     }
 
     //Basic Methods
@@ -43,18 +47,35 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int i = 0; i < cols; i++)
             {
-                Cell cell = new Cell();
-                cell.x = i;
-                cell.z = q;
+                Cell cell = new Cell
+                {
+                    x = i,
+                    z = q
+                };
 
                 grid.Add(cell);
             }
         }
+        
+        current = grid[0];
+    }
+
+    private void SetupWalls()
+    {
+        Vector3 angle = Vector3.zero;
+        int n, j;
+
         for (int i = 0; i < grid.Count; i++)
         {
-            grid[i].prefab = Instantiate(cellPrefab, new Vector3(grid[i].x, 0, grid[i].z), Quaternion.identity, transform);
+            n = 0;
+            
+            for(j = 0; j<grid[i].walls.Length; j++) {
+                n = (n<<1) + (grid[i].walls[j] ? 1 : 0);
+            }
+            
+            Debug.Log(n + " : " + cellPrefabs[n].name + " " + cellPrefabsRotations[n].eulerAngles);
+            grid[i].prefab = Instantiate(cellPrefabs[n], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
         }
-        current = grid[0];
     }
 
     private void MazeLogic()
@@ -116,9 +137,6 @@ public class MazeGenerator : MonoBehaviour
             a.walls[1] = false;
             b.walls[3] = false;
         }
-
-        a.CalculateWalls();
-        b.CalculateWalls();
     }
 
     private void CorrectPath()

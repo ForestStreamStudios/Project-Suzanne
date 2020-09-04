@@ -7,6 +7,7 @@ public class Cell
     #region Variables
     public int x;
     public int z;
+    // -x, +z, +x, -z
     public bool[] walls = { true, true, true, true };
     public bool visited = false;
 
@@ -16,7 +17,7 @@ public class Cell
     #endregion
 
     #region Methods
-    public void CalculateWalls()
+    /*public void CalculateWalls()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -28,7 +29,7 @@ public class Cell
                 MazeGenerator.deleteCell.Add(wall);
             }
         }
-    }
+    }*/
     public Cell CheckNeighbors()
     {
         if (Index(x, z - 1) != -1)
@@ -73,6 +74,15 @@ public class Cell
             return -1;
         }
         return i + j * MazeGenerator.cols;
+    }
+    public int CountWalls() {
+        int res = 0;
+        foreach(bool i in walls) {
+            if(i)
+                res++;
+        }
+
+        return res;
     }
     #endregion
 }
