@@ -13,7 +13,9 @@ public class MazeGenerator : MonoBehaviour
 
     [Header("Cell Variables")]
     public float cellSize = 1;
-    public GameObject[] cellPrefabs;
+    [Header("Cells Prefabs")]
+    public int[] cellTypes;
+    public CellType[] alternativeCells;
     public Quaternion[] cellPrefabsRotations;
     public static List<Cell> grid = new List<Cell>();
     public static List<Cell> stack = new List<Cell>();
@@ -69,17 +71,17 @@ public class MazeGenerator : MonoBehaviour
             new KeyValuePair<int, int>(Cell.Index(cols-1, rows/2), 2)
         };
 
-        for(int i = 0; i<exitsCount; i++) {
-            int index = Random.Range(0, indexAndWallToRemove.Count);
-            KeyValuePair<int, int> kvp = indexAndWallToRemove[index];
+        for(int i = 0; i<exitsCount; i++) {;
+            KeyValuePair<int, int> kvp = indexAndWallToRemove[Random.Range(0, indexAndWallToRemove.Count)];
             grid[kvp.Key].walls[kvp.Value] = false;
-            indexAndWallToRemove.RemoveAt(index);
+            indexAndWallToRemove.Remove(kvp);
         }
     }
 
     private void SetupWalls()
     {
         Vector3 angle = Vector3.zero;
+        GameObject[] prefabs;
         int n, j;
 
         for (int i = 0; i < grid.Count; i++)
@@ -90,8 +92,9 @@ public class MazeGenerator : MonoBehaviour
                 n = (n<<1) + (grid[i].walls[j] ? 1 : 0);
             }
             
+            prefabs = alternativeCells[cellTypes[n]].CellList;
             // Debug.Log(n + " : " + cellPrefabs[n].name + " " + cellPrefabsRotations[n].eulerAngles);
-            grid[i].prefab = Instantiate(cellPrefabs[n], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
+            grid[i].prefab = Instantiate(prefabs[Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
         }
     }
 
@@ -141,3 +144,10 @@ public class MazeGenerator : MonoBehaviour
     }
     #endregion
 }
+
+// Required to see it in editor
+ [System.Serializable]
+ public class CellType
+ {
+     public GameObject[] CellList;
+ }

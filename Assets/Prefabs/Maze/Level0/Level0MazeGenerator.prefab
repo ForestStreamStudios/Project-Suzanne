@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8707782482584689550}
   - component: {fileID: 8707782482584689549}
   m_Layer: 0
-  m_Name: MazeGenerator
+  m_Name: Level0MazeGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   columsCount: 10
   rowsCount: 10
+  exitsCount: 3
   cellSize: 1
   cellPrefabs:
   - {fileID: 5224783885215737960, guid: 6142b937311d4334a954a8a4f62928b1, type: 3}
@@ -63,6 +64,19 @@ MonoBehaviour:
   - {fileID: 5224783885215737960, guid: e3452f444c0d04743b52890aba8dcc04, type: 3}
   - {fileID: 5224783885215737960, guid: e3452f444c0d04743b52890aba8dcc04, type: 3}
   - {fileID: 5224783885215737960, guid: 6142b937311d4334a954a8a4f62928b1, type: 3}
+  cellTypes: 00000000010000000100000002000000010000000400000002000000030000000100000002000000040000000300000002000000030000000300000000000000
+  alternativeCells:
+  - CellList:
+    - {fileID: 5224783885215737960, guid: 6142b937311d4334a954a8a4f62928b1, type: 3}
+  - CellList:
+    - {fileID: 5224783885215737960, guid: 13bc84c2710bab94ca763548d9cb3e49, type: 3}
+  - CellList:
+    - {fileID: 5224783885215737960, guid: 39eb0e84cbf53a247aa52f604e8e0351, type: 3}
+    - {fileID: 5224783885215737960, guid: c03af02eb29a28641999c5dac25992d5, type: 3}
+  - CellList:
+    - {fileID: 5224783885215737960, guid: e3452f444c0d04743b52890aba8dcc04, type: 3}
+  - CellList:
+    - {fileID: 5224783885215737960, guid: b5b3989a7fc8119499475819ac02bf9a, type: 3}
   cellPrefabsRotations:
   - {x: 0, y: 0, z: 0, w: 1}
   - {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
