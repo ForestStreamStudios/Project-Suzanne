@@ -56,7 +56,7 @@ public class Cell
             return null;
         }
     }
-    public int Index(int i, int j)
+    public static int Index(int i, int j)
     {
         if (i < 0 || j < 0 || i > MazeGenerator.cols - 1 || j > MazeGenerator.rows - 1)
         {

@@ -6,8 +6,9 @@ public class MazeGenerator : MonoBehaviour
 {
     #region Variables
     [Header("Maze Variables")]
-    [Range(3, 2000)] public int columsCount = 3;
-    [Range(3, 2000)] public int rowsCount = 3;
+    [Range(3, 60)] public int columsCount = 3;
+    [Range(3, 60)] public int rowsCount = 3;
+    [Range(1, 4)] public int exitsCount = 3;
     public static int cols, rows;
 
     [Header("Cell Variables")]
@@ -31,6 +32,7 @@ public class MazeGenerator : MonoBehaviour
             MazeLogic();
         } while (stack.Count > 0);
 
+        MakeExits();
         SetupWalls();
     }
 
@@ -57,6 +59,24 @@ public class MazeGenerator : MonoBehaviour
         current = grid[0];
     }
 
+    private void MakeExits() {
+        // key : index of an exit cell in the cells list
+        // value : index of its wall to remove to make an exit
+        List<KeyValuePair<int, int>> indexAndWallToRemove = new List<KeyValuePair<int, int>> {
+            new KeyValuePair<int, int>(Cell.Index(cols/2, 0), 3),
+            new KeyValuePair<int, int>(Cell.Index(cols/2, rows-1), 1),
+            new KeyValuePair<int, int>(Cell.Index(0, rows/2), 0),
+            new KeyValuePair<int, int>(Cell.Index(cols-1, rows/2), 2)
+        };
+
+        for(int i = 0; i<exitsCount; i++) {
+            int index = Random.Range(0, indexAndWallToRemove.Count);
+            KeyValuePair<int, int> kvp = indexAndWallToRemove[index];
+            grid[kvp.Key].walls[kvp.Value] = false;
+            indexAndWallToRemove.RemoveAt(index);
+        }
+    }
+
     private void SetupWalls()
     {
         Vector3 angle = Vector3.zero;
@@ -70,7 +90,7 @@ public class MazeGenerator : MonoBehaviour
                 n = (n<<1) + (grid[i].walls[j] ? 1 : 0);
             }
             
-            Debug.Log(n + " : " + cellPrefabs[n].name + " " + cellPrefabsRotations[n].eulerAngles);
+            // Debug.Log(n + " : " + cellPrefabs[n].name + " " + cellPrefabsRotations[n].eulerAngles);
             grid[i].prefab = Instantiate(cellPrefabs[n], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
         }
     }
