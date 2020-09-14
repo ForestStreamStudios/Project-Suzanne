@@ -93,7 +93,7 @@ public class MazeGenerator : MonoBehaviour
             }
             
             prefabs = alternativeCells[cellTypes[n]].CellList;
-            Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
+            //Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
             grid[i].prefab = Instantiate(prefabs[Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
         }
     }

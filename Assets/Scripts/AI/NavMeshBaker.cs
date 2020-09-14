@@ -44,11 +44,8 @@ public class NavMeshBaker : MonoBehaviour
     }
 
     public void SetSize()
-    {   //size = new Vector3((cellSize * mazeSize), 50, (cellSize * mazeSize));
-        //Vector3 size2 = size;
-        center = mazeCenter.position; //(size2/2) - new Vector3(cellSize/2, 0,cellSize/2);
-        Debug.Log("Center:" + center.ToString());
-        Debug.Log("Cellsize:"+cellSize+" MazeSize:"+mazeSize+ " Size:" + center.ToString());
+    {   
+        center = mazeCenter.position; 
     }
 
     void BakeNavMesh()
@@ -59,7 +56,6 @@ public class NavMeshBaker : MonoBehaviour
         NavMeshSourceTag.Collect(ref sources);
         var defaultBuildSettings = NavMesh.GetSettingsByID(0);
         var bounds = new Bounds(center, size);
-        Debug.Log("Sources: " + sources.Count);
         NavMeshBuilder.UpdateNavMeshData(navMeshData,defaultBuildSettings,sources,bounds);
     }
     void OnDrawGizmosSelected()
