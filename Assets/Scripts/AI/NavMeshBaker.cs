@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
@@ -18,32 +19,41 @@ public class NavMeshBaker : MonoBehaviour
 
     public Transform mazeCenter;
     Vector3 center;
-    public int mazeSize;
-    public Vector3 size;
+    public float mazeSize;
+    public float cellSize;
+    Vector3 size;
+    bool started = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        SetSize();
-        BakeNavMesh();
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(!started)
+        {
+            //Thread.Sleep(100);
+            started = true;
+            SetSize();
+            BakeNavMesh();
+        }
     }
 
     public void SetSize()
-    {
-        center = mazeCenter.position;
-       // size = new Vector3(50 * mazeSize, 50, 50 * mazeSize);
+    {   size = new Vector3((cellSize * mazeSize), 50, (cellSize * mazeSize));
+        Vector3 size2 = size;
+        center = mazeCenter.position + (size2/2) - new Vector3(cellSize/2, 0,cellSize/2);
+        Debug.Log("Center:" + center.ToString());
+        Debug.Log("Cellsize:"+cellSize+" MazeSize:"+mazeSize+ " Size:" + center.ToString());
     }
 
     void BakeNavMesh()
     {
-        navMeshData = new NavMeshData();
+        navMeshData = new NavMeshData(0);
         navMeshInstance = NavMesh.AddNavMeshData(navMeshData);
 
         NavMeshSourceTag.Collect(ref sources);
@@ -62,9 +72,9 @@ public class NavMeshBaker : MonoBehaviour
 
         Gizmos.color = Color.yellow;
         var bounds = new Bounds(center, size);
-        Gizmos.DrawWireCube(bounds.center, bounds.size);
+       // Gizmos.DrawWireCube(bounds.center, bounds.size);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(center, size);
+       // Gizmos.DrawWireCube(center, size);
     }
 }
