@@ -1404,6 +1404,11 @@ PrefabInstance:
       propertyPath: speed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1986577417306244506, guid: bd2b2048988aca140af972653b362ec3,
+        type: 3}
+      propertyPath: stamina
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1986577417306244507, guid: bd2b2048988aca140af972653b362ec3,
         type: 3}
       propertyPath: m_StepOffset
