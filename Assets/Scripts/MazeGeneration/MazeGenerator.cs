@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MazeGenerator : MonoBehaviour
 {
@@ -38,7 +40,20 @@ public class MazeGenerator : MonoBehaviour
         SetupWalls();
     }
 
+
+
     //Basic Methods
+
+    public void DestroyMaze()
+    {
+        Debug.Log("Destroy Maze");
+        for(int i = 0; i<grid.Count; i++)
+        {
+
+            DestroyImmediate(grid[i].prefab);
+        }
+    }
+
     private void SetupGrid()
     {
         cols = columsCount;
@@ -72,7 +87,7 @@ public class MazeGenerator : MonoBehaviour
         };
 
         for(int i = 0; i<exitsCount; i++) {;
-            KeyValuePair<int, int> kvp = indexAndWallToRemove[Random.Range(0, indexAndWallToRemove.Count)];
+            KeyValuePair<int, int> kvp = indexAndWallToRemove[UnityEngine.Random.Range(0, indexAndWallToRemove.Count)];
             grid[kvp.Key].walls[kvp.Value] = false;
             indexAndWallToRemove.Remove(kvp);
         }
@@ -94,7 +109,7 @@ public class MazeGenerator : MonoBehaviour
             
             prefabs = alternativeCells[cellTypes[n]].CellList;
             //Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
-            grid[i].prefab = Instantiate(prefabs[Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
+            grid[i].prefab = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
         }
     }
 
