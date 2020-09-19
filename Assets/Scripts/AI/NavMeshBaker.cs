@@ -7,7 +7,7 @@ using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 
 public class NavMeshBaker : MonoBehaviour
 {
-    /*
+    /* USAGE:
      * All objects that are included in navmesh must have NavMeshSourceTag component attached to them. 
      * All objects must have Read Access allowed under the Model section of the Asset.
      * 
