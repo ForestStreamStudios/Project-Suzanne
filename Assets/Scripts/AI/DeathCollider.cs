@@ -18,17 +18,12 @@ public class DeathCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision detected");
         if (other.gameObject.CompareTag("Respawn"))
         {
             Cursor.lockState = UnityEngine.CursorLockMode.Confined;
-            RemoveMaze();
-            SceneManager.LoadScene("Death Screen");
+            SceneManager.LoadScene("Death Screen",LoadSceneMode.Single);
+
         }
-    }
-    private void RemoveMaze()
-    {
-        GameObject.FindGameObjectWithTag("MazeGenerator").GetComponent<MazeGenerator>().DestroyMaze();
     }
 }
 

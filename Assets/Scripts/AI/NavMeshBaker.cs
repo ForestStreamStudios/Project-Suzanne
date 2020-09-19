@@ -28,7 +28,10 @@ public class NavMeshBaker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        NavMesh.RemoveAllNavMeshData();
+        SetSize();
+        BakeNavMesh();
+        started = true;
     }
 
     // Update is called once per frame
@@ -57,6 +60,7 @@ public class NavMeshBaker : MonoBehaviour
         var defaultBuildSettings = NavMesh.GetSettingsByID(0);
         var bounds = new Bounds(center, size);
         NavMeshBuilder.UpdateNavMeshData(navMeshData,defaultBuildSettings,sources,bounds);
+        //NavMeshBuilder.BuildNavMeshData(defaultBuildSettings, sources, bounds, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     void OnDrawGizmosSelected()
     {

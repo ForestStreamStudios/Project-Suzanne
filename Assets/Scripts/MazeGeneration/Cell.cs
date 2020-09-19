@@ -16,6 +16,11 @@ public class Cell
     #endregion
 
     #region Methods
+    public void DestroyCell()
+    {
+        GameObject.Destroy(prefab);
+
+    }
 
     public Cell GetRandomNeighbor()
     {

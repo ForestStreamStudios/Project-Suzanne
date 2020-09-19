@@ -29,6 +29,10 @@ public class MazeGenerator : MonoBehaviour
     #region Methods
     private void Start()
     {
+        DestroyMaze();
+        grid = new List<Cell>();
+        stack = new List<Cell>();
+        correctPath = new List<Cell>();
         SetupGrid();
 
         do
@@ -38,20 +42,20 @@ public class MazeGenerator : MonoBehaviour
 
         MakeExits();
         SetupWalls();
+        
+       
     }
-
 
 
     //Basic Methods
 
     public void DestroyMaze()
     {
-        Debug.Log("Destroy Maze");
-        for(int i = 0; i<grid.Count; i++)
+        for (int i = 0; i < grid.Count; i++)
         {
-
-            DestroyImmediate(grid[i].prefab);
+            grid[i].DestroyCell();
         }
+
     }
 
     private void SetupGrid()

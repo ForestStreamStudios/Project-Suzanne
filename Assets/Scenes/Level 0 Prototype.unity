@@ -2124,6 +2124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level0MazeGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 8707782482584689548, guid: 53c28a2cafb455f4897281b4014d42b7,
+        type: 3}
+      propertyPath: m_TagString
+      value: MazeGenerator
+      objectReference: {fileID: 0}
     - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
         type: 3}
       propertyPath: alternativeCells.Array.data[2].CellList.Array.size
