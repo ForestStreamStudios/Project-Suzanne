@@ -13,14 +13,27 @@ public class MoveTo : MonoBehaviour
 
     void Start()
     {
-        
+        gameObject.AddComponent<NavMeshAgent>();
         agent = GetComponent<NavMeshAgent>();
+        agent.radius = 0.5f;
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit startPos;
+            NavMesh.SamplePosition(gameObject.transform.position, out startPos, 300, NavMesh.AllAreas);
+            agent.Warp(startPos.position);
+        }
         speed = agent.speed;
     }
 
     private void Update()
     {
-            agent.destination = goal.position;
+        if (!agent.isOnNavMesh)
+        {
+            NavMeshHit startPos;
+            NavMesh.SamplePosition(gameObject.transform.position, out startPos, 300, NavMesh.AllAreas);
+            agent.Warp(startPos.position);
+        }
+        agent.destination = goal.position; 
     }
 }
 

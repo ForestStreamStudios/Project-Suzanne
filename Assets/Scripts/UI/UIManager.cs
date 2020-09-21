@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
 
     void ResetLevel()
     {
+        Cursor.visible = false;
         SceneManager.LoadScene(levelZero, LoadSceneMode.Single);
     }
 

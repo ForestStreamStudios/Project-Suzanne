@@ -21,6 +21,7 @@ public class DeathCollider : MonoBehaviour
         if (other.gameObject.CompareTag("Respawn"))
         {
             Cursor.lockState = UnityEngine.CursorLockMode.Confined;
+            Cursor.visible = true;
             SceneManager.LoadScene("Death Screen",LoadSceneMode.Single);
 
         }

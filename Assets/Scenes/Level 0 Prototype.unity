@@ -763,6 +763,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1986577417306244198, guid: bd2b2048988aca140af972653b362ec3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1986577417953856415, guid: bd2b2048988aca140af972653b362ec3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -776,7 +781,7 @@ PrefabInstance:
     - target: {fileID: 1986577418310541122, guid: bd2b2048988aca140af972653b362ec3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.924
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2b2048988aca140af972653b362ec3, type: 3}
@@ -792,7 +797,6 @@ GameObject:
   - component: {fileID: 1910576136}
   - component: {fileID: 1910576135}
   - component: {fileID: 1910576134}
-  - component: {fileID: 1910576133}
   - component: {fileID: 1910576138}
   m_Layer: 0
   m_Name: Cube
@@ -801,28 +805,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!195 &1910576133
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910576132}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!65 &1910576134
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -891,7 +873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910576132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.2, y: 11.2, z: 68.8}
+  m_LocalPosition: {x: 76.75, y: 10.25, z: 62.95}
   m_LocalScale: {x: 1, y: 15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
         OnResume();
     }
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     public void OnPause()
     {
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (OnGamePause != null)
             OnGamePause();
     }

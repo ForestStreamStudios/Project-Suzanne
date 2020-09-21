@@ -54,12 +54,13 @@ public class NavMeshBaker : MonoBehaviour
     void BakeNavMesh()
     {
         navMeshData = new NavMeshData(0);
-        navMeshInstance = NavMesh.AddNavMeshData(navMeshData);
+        
 
         NavMeshSourceTag.Collect(ref sources);
         var defaultBuildSettings = NavMesh.GetSettingsByID(0);
         var bounds = new Bounds(center, size);
         NavMeshBuilder.UpdateNavMeshData(navMeshData,defaultBuildSettings,sources,bounds);
+        navMeshInstance = NavMesh.AddNavMeshData(navMeshData);
         //NavMeshBuilder.BuildNavMeshData(defaultBuildSettings, sources, bounds, this.gameObject.transform.position, this.gameObject.transform.rotation);
     }
     void OnDrawGizmosSelected()
