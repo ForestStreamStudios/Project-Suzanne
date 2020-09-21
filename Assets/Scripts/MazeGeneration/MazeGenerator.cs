@@ -18,8 +18,15 @@ public class MazeGenerator : MonoBehaviour
     [Header("Cells Prefabs")]
     public int[] cellTypes;
     public CellType[] alternativeCells;
+    
     public Quaternion[] cellPrefabsRotations;
     public static List<Cell> grid = new List<Cell>();
+
+
+    // Testing structures for generating maze with standard cells in order to correctly orient prefabs.
+    // public CellType[] TESTCELLS;
+    // public static List<Cell> TESTGRID = new List<Cell>();
+
     public static List<Cell> stack = new List<Cell>();
     public static List<Cell> correctPath = new List<Cell>();
     private Cell current;
@@ -101,6 +108,9 @@ public class MazeGenerator : MonoBehaviour
     {
         Vector3 angle = Vector3.zero;
         GameObject[] prefabs;
+
+        //Testing structure for orientation of prefabs.
+        //GameObject[] prefabs2;
         int n, j;
 
         for (int i = 0; i < grid.Count; i++)
@@ -110,10 +120,17 @@ public class MazeGenerator : MonoBehaviour
             for(j = 0; j<grid[i].walls.Length; j++) {
                 n = (n<<1) + (grid[i].walls[j] ? 1 : 0);
             }
-            
             prefabs = alternativeCells[cellTypes[n]].CellList;
+
+
+            //Diagnostic for orienting cell prefabs
+            /*prefabs2 = TESTCELLS[cellTypes[n]].CellList;
+            TESTGRID = (List<Cell>)grid;
+            TESTGRID[i].prefab = Instantiate(prefabs2[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x * cellSize, 0, grid[i].z * cellSize), cellPrefabsRotations[n], transform);
+            Debug.Log(n);*/
+
             //Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
-            grid[i].prefab = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n], transform);
+            grid[i].prefab = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n]*prefabs[0].transform.rotation, transform);
         }
     }
 
