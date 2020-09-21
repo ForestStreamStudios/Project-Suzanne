@@ -130,7 +130,8 @@ public class MazeGenerator : MonoBehaviour
             Debug.Log(n);*/
 
             //Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
-            grid[i].prefab = Instantiate(prefabs[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n]*prefabs[0].transform.rotation, transform);
+            int p = UnityEngine.Random.Range(0, prefabs.Length);
+            grid[i].prefab = Instantiate(prefabs[p], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n]*prefabs[p].transform.rotation, transform);
         }
     }
 
