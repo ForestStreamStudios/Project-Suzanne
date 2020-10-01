@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
     public float sprintModifier = 1.5f;
+    [Range(0,100)]
+    public float stamina = 100;
+    public int sprintRegen = 25;
 
     private Vector3 velocity;
     private CharacterController controller;
@@ -34,8 +36,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            verticalSpeed *= sprintModifier;
+            if (stamina > 0)
+            {
+                verticalSpeed *= sprintModifier;
+                stamina -= 75 * Time.deltaTime;
+            }
+            else {
+                stamina = -50;
+            }
         }
+        stamina = Mathf.Clamp(stamina + (sprintRegen * Time.deltaTime), -50, 100);
 
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
@@ -44,4 +54,5 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move((translation + velocity) * Time.deltaTime);
     }
+
 }
