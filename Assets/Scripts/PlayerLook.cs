@@ -3,6 +3,7 @@
 public class PlayerLook : MonoBehaviour
 {
     public Transform cameraTransform;
+    public float sensitivity = 0f;
 
     private float xRotation = 0f;
 
@@ -13,8 +14,8 @@ public class PlayerLook : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
         xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f);
 
