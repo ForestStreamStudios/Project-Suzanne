@@ -3,6 +3,10 @@
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
+    public float sprintModifier = 1.5f;
+    [Range(0,100)]
+    public float stamina = 100;
+    public int sprintRegen = 25;
 
     private Vector3 velocity;
     private CharacterController controller;
@@ -20,14 +24,35 @@ public class PlayerMovement : MonoBehaviour
     {
         velocity.y += gravity * Time.deltaTime;
         if (controller.isGrounded)
+        {
             velocity.y = 0;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                velocity.y = 3;
+            }
+        }
+
+        float verticalSpeed = speed;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            if (stamina > 0)
+            {
+                verticalSpeed *= sprintModifier;
+                stamina -= 75 * Time.deltaTime;
+            }
+            else {
+                stamina = -50;
+            }
+        }
+        stamina = Mathf.Clamp(stamina + (sprintRegen * Time.deltaTime), -50, 100);
 
         float hAxis = Input.GetAxis("Horizontal");
         float vAxis = Input.GetAxis("Vertical");
 
-        Vector3 translation = transform.right * hAxis + transform.forward * vAxis;
+        Vector3 translation = transform.right * speed * hAxis + transform.forward * verticalSpeed * vAxis;
 
-        controller.Move((translation * speed + velocity) * Time.deltaTime);
+        controller.Move((translation + velocity) * Time.deltaTime);
     }
 
 }
