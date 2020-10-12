@@ -29,6 +29,10 @@ public class MazeGenerator : MonoBehaviour
     public GameObject doorObject;
     List<GameObject> doorPrefabs = new List<GameObject>();
 
+    [Header("Key Game Object")]
+    public GameObject keyObj;
+    GameObject keyInstance;
+
 
     // Testing structures for generating maze with standard cells in order to correctly orient prefabs.
     // public CellType[] TESTCELLS;
@@ -64,6 +68,7 @@ public class MazeGenerator : MonoBehaviour
         MakeExits();
         SetupWalls();
         PlaceDoors();
+        PlaceKey();
        
     }
 
@@ -76,7 +81,11 @@ public class MazeGenerator : MonoBehaviour
         {
             grid[i].DestroyCell();
         }
-
+        foreach(GameObject obj in doorPrefabs)
+        {
+            Destroy(obj);
+        }
+        Destroy(keyInstance);
     }
 
     private void SetupGrid()
@@ -213,8 +222,6 @@ public class MazeGenerator : MonoBehaviour
         float xOffset = 0;
         float zOffset = 0;
         int rotation = 0;
-        Debug.Log("Rows/Cols" + rows + " " + cols);
-        Debug.Log(doorCell.x + " "+doorCell.z);
         if(doorCell.x == 0 && doorCell.z == 0)
         {
             //Bottom Left
@@ -295,6 +302,17 @@ public class MazeGenerator : MonoBehaviour
 
         doorPrefabs[exitInd] = Instantiate(doorObject, new Vector3(grid[index].x * cellSize+xOffset, 0, grid[index].z * cellSize+zOffset), doorRotation, transform);
     }
+
+    public void PlaceKey()
+    {
+        float x = UnityEngine.Random.Range(1, cols * cellSize -1);
+        float z = UnityEngine.Random.Range(1, rows * cellSize -1);
+        Debug.Log(x + " " + z);
+        x -= cellSize / 2;
+        z -= cellSize / 2;
+        keyInstance = Instantiate(keyObj,new Vector3(x,2.5f,z), new Quaternion(), transform);
+    }
+
     #endregion
 }
 

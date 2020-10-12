@@ -271,12 +271,12 @@ PrefabInstance:
     - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
         type: 3}
       propertyPath: cellPrefabsRotations.Array.data[4].y
-      value: 0.70710677
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
         type: 3}
       propertyPath: cellPrefabsRotations.Array.data[4].w
-      value: -0.70710677
+      value: -0.00000004371139
       objectReference: {fileID: 0}
     - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
         type: 3}
@@ -337,6 +337,18 @@ PrefabInstance:
       propertyPath: TESTCELLS.Array.data[4].CellList.Array.data[0]
       value: 
       objectReference: {fileID: 5224783885215737960, guid: b5b3989a7fc8119499475819ac02bf9a,
+        type: 3}
+    - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
+        type: 3}
+      propertyPath: doorObject
+      value: 
+      objectReference: {fileID: 5314748223970318221, guid: e7b16aef3322281428ca94d2031c7058,
+        type: 3}
+    - target: {fileID: 8707782482584689549, guid: 53c28a2cafb455f4897281b4014d42b7,
+        type: 3}
+      propertyPath: keyObj
+      value: 
+      objectReference: {fileID: 7462918729179668212, guid: 93827b356deabb04c8db9cc83a9338b0,
         type: 3}
     - target: {fileID: 8707782482584689550, guid: 53c28a2cafb455f4897281b4014d42b7,
         type: 3}
@@ -660,6 +672,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1986577417306244198, guid: bd2b2048988aca140af972653b362ec3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd2b2048988aca140af972653b362ec3, type: 3}
 --- !u!1 &1371646951
@@ -740,8 +757,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 582adbd84082fdb4faf7cd4beb1ccd14, type: 2}
   m_StaticLightingSkyUniqueID: 0
-  m_SkySettings: {fileID: 0}
-  m_SkySettingsFromProfile: {fileID: 0}
 --- !u!4 &1631290531
 Transform:
   m_ObjectHideFlags: 1
