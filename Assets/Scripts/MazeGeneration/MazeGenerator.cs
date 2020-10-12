@@ -27,6 +27,7 @@ public class MazeGenerator : MonoBehaviour
 
     [Header("Door Game Object")]
     public GameObject doorObject;
+    List<GameObject> doorPrefabs = new List<GameObject>();
 
 
     // Testing structures for generating maze with standard cells in order to correctly orient prefabs.
@@ -49,6 +50,10 @@ public class MazeGenerator : MonoBehaviour
         grid = new List<Cell>();
         stack = new List<Cell>();
         correctPath = new List<Cell>();
+        for(int i = 0; i< exitsCount; i++)
+        {
+            doorPrefabs.Add(new GameObject());
+        }
         SetupGrid();
 
         do
@@ -58,7 +63,7 @@ public class MazeGenerator : MonoBehaviour
 
         MakeExits();
         SetupWalls();
-        
+        PlaceDoors();
        
     }
 
@@ -190,9 +195,8 @@ public class MazeGenerator : MonoBehaviour
         }
     }
 
-    private Cell GetCell(int x, int y)
+    private Cell GetCell(int index)
     {
-        int index = y * columsCount + x;
         return grid[index];
     }
 
@@ -200,15 +204,17 @@ public class MazeGenerator : MonoBehaviour
     {
         for(int i = 0; i< exits.Count; i++)
         {
-            PlaceDoor(GetCell(exits[i].Key, exits[i].Value));
+            PlaceDoor(GetCell(exits[i].Key), exits[i].Key, i);
         }
     }
 
-    private void PlaceDoor(Cell doorCell)
+    private void PlaceDoor(Cell doorCell, int index, int exitInd)
     {
         float xOffset = 0;
         float zOffset = 0;
-        int wallIndex = 0;
+        int rotation = 0;
+        Debug.Log("Rows/Cols" + rows + " " + cols);
+        Debug.Log(doorCell.x + " "+doorCell.z);
         if(doorCell.x == 0 && doorCell.z == 0)
         {
             //Bottom Left
@@ -219,9 +225,10 @@ public class MazeGenerator : MonoBehaviour
             else
             {
                 xOffset = -(0.5f * cellSize);
+                rotation = 0;
             }
-        }
-        if (doorCell.x == cols && doorCell.z == 0)
+        }else
+        if (doorCell.x == cols-1 && doorCell.z == 0)
         {
             //Bottom Right
             if (!doorCell.walls[0])
@@ -231,8 +238,62 @@ public class MazeGenerator : MonoBehaviour
             else
             {
                 xOffset = (0.5f * cellSize);
+                rotation = 90;
             }
+        }else
+        if(doorCell.x == 0 && doorCell.z == rows-1)
+        {
+            //top left
+            if (!doorCell.walls[2])
+            {
+                zOffset = (0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = -(0.5f * cellSize);
+                rotation = 90;
+            }
+        }else
+        if (doorCell.x == cols-1 && doorCell.z == rows-1)
+        {
+            //top right
+            if (!doorCell.walls[2])
+            {
+                zOffset = (0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = (0.5f * cellSize);
+                rotation = 90;
+            }
+        }else
+        if (doorCell.x == 0)
+        {   
+            //left edge
+            xOffset = -(0.5f * cellSize);
+            rotation = 90;
+        }else
+        if (doorCell.x == cols-1)
+        {   
+            //right edge
+            xOffset = (0.5f * cellSize);
+            rotation = 90;
+        }else
+        if (doorCell.z == 0)
+        {
+            //bottom edge
+            zOffset = -(0.5f * cellSize);
         }
+        else
+        if (doorCell.z == rows-1)
+        {
+            //left edge
+            zOffset = (0.5f * cellSize);
+        }
+        Quaternion doorRotation = new Quaternion();
+        doorRotation.eulerAngles = new Vector3(0, rotation+90, 0);
+
+        doorPrefabs[exitInd] = Instantiate(doorObject, new Vector3(grid[index].x * cellSize+xOffset, 0, grid[index].z * cellSize+zOffset), doorRotation, transform);
     }
     #endregion
 }
