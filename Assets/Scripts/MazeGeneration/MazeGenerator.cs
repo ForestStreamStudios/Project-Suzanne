@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MazeGenerator : MonoBehaviour
 {
+
+    //Authors: Lugrim
+    //additional changes by Grant Guenter
     #region Variables
     [Header("Maze Variables")]
     [Range(3, 60)] public int columsCount = 3;
@@ -22,10 +25,16 @@ public class MazeGenerator : MonoBehaviour
     public Quaternion[] cellPrefabsRotations;
     public static List<Cell> grid = new List<Cell>();
 
+    [Header("Door Game Object")]
+    public GameObject doorObject;
+
 
     // Testing structures for generating maze with standard cells in order to correctly orient prefabs.
     // public CellType[] TESTCELLS;
     // public static List<Cell> TESTGRID = new List<Cell>();
+
+
+    List<KeyValuePair<int, int>> exits = new List<KeyValuePair<int, int>>();
 
     public static List<Cell> stack = new List<Cell>();
     public static List<Cell> correctPath = new List<Cell>();
@@ -101,6 +110,7 @@ public class MazeGenerator : MonoBehaviour
             KeyValuePair<int, int> kvp = indexAndWallToRemove[UnityEngine.Random.Range(0, indexAndWallToRemove.Count)];
             grid[kvp.Key].walls[kvp.Value] = false;
             indexAndWallToRemove.Remove(kvp);
+            exits.Add(kvp);
         }
     }
 
@@ -177,6 +187,51 @@ public class MazeGenerator : MonoBehaviour
         {
             a.walls[1] = false;
             b.walls[3] = false;
+        }
+    }
+
+    private Cell GetCell(int x, int y)
+    {
+        int index = y * columsCount + x;
+        return grid[index];
+    }
+
+    private void PlaceDoors()
+    {
+        for(int i = 0; i< exits.Count; i++)
+        {
+            PlaceDoor(GetCell(exits[i].Key, exits[i].Value));
+        }
+    }
+
+    private void PlaceDoor(Cell doorCell)
+    {
+        float xOffset = 0;
+        float zOffset = 0;
+        int wallIndex = 0;
+        if(doorCell.x == 0 && doorCell.z == 0)
+        {
+            //Bottom Left
+            if(!doorCell.walls[0])
+            {
+                zOffset = -(0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = -(0.5f * cellSize);
+            }
+        }
+        if (doorCell.x == cols && doorCell.z == 0)
+        {
+            //Bottom Right
+            if (!doorCell.walls[0])
+            {
+                zOffset = -(0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = (0.5f * cellSize);
+            }
         }
     }
     #endregion
