@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header ("Next Scene")]
+    public string sceneName;
+
     void Start()
     {
         
@@ -23,7 +26,7 @@ public class Door : MonoBehaviour
         {
             Cursor.lockState = UnityEngine.CursorLockMode.Confined;
             Cursor.visible = true;
-            SceneManager.LoadScene("Death Screen", LoadSceneMode.Single);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 
         }
     }

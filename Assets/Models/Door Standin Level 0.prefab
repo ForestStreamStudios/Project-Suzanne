@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2387467634593953522}
   - component: {fileID: 7369973843827866497}
   m_Layer: 0
-  m_Name: Door Standin
+  m_Name: Door Standin Level 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509eab44d25b1be4b85ae237224865f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneName: Level 1
