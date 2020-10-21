@@ -6,6 +6,7 @@ public class Key : PickupObject
 {
     protected override void PickUpEffect(GameObject obj)
     {
+        gameObject.SetActive(false);
         KeyDoorManager.instance.keyPickedUp = true;
         Debug.Log("key picked up");
     }
