@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Key : PickupObject
 {
-    private bool pickedup = false;
     protected override void PickUpEffect(GameObject obj)
     {
         
         KeyDoorManager.instance.keyPickedUp = true;
-        AudioSource sound = gameObject.GetComponent<AudioSource>();
+        
         if (!pickedup)
         {
             sound.Play();

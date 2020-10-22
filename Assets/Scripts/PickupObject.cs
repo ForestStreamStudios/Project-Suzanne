@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//Author Speterius
+//Additional code by Grant Guenter
 public abstract class PickupObject : MonoBehaviour
 {
 
@@ -7,12 +9,19 @@ public abstract class PickupObject : MonoBehaviour
 
     protected Collider objectCollider;
     protected Renderer objectRenderer;
+    protected bool pickedup = false;
+    public bool soundEffect;
+    protected AudioSource sound;
 
     void Start()
     {
         objectRenderer = GetComponent<Renderer>();
         objectCollider = GetComponent<Collider>();
+        if(soundEffect)
+        {
+            sound = gameObject.GetComponent<AudioSource>();
 
+        }
         // Set the collider to Trigger
         if (objectCollider != null)
         {
@@ -30,6 +39,8 @@ public abstract class PickupObject : MonoBehaviour
         if (collider.gameObject.CompareTag("Player"))
         {
             PickUpEffect(collider.gameObject);
+            pickedup = true;
         }
+        
     }
 }
