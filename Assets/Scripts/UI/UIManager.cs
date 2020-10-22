@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
+//Author: Grant Guenter
 public class UIManager : MonoBehaviour
 {
 

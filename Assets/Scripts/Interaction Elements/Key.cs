@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Author: Grant Guenter
 public class Key : PickupObject
 {
     protected override void PickUpEffect(GameObject obj)

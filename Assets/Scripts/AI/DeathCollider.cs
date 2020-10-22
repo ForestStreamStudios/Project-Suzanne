@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Author: Grant Guenter
 public class DeathCollider : MonoBehaviour
 {
     // Start is called before the first frame update

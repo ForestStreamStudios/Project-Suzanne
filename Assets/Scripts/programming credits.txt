@@ -1,0 +1,9 @@
+Navmesh Components by Unity Technologies
+
+Programming:
+Lugrim
+Peter Seres (Speterius)
+Grant Guenter (guenterg)
+Alex Sindledecker
+techpiano2
+bariss0102

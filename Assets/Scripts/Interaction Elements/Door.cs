@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Author: Grant Guenter
 public class Door : MonoBehaviour
 {
     // Start is called before the first frame update

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+//Author: Grant Guenter
 public class KeyDoorManager : ScriptableSingleton<KeyDoorManager>
 {
     public bool keyPickedUp;

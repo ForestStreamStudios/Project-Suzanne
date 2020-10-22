@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//Author: Speterius
 public class SpeedPowerUpObject : PickupObject
 {
 

@@ -20,7 +20,6 @@ public abstract class PickupObject : MonoBehaviour
         if(soundEffect)
         {
             sound = gameObject.GetComponent<AudioSource>();
-
         }
         // Set the collider to Trigger
         if (objectCollider != null)

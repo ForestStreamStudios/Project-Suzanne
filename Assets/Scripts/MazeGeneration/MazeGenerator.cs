@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Authors: Lugrim
+//additional changes by Grant Guenter
 public class MazeGenerator : MonoBehaviour
 {
 
-    //Authors: Lugrim
-    //additional changes by Grant Guenter
+    
     #region Variables
     [Header("Maze Variables")]
     [Range(3, 60)] public int columsCount = 3;
