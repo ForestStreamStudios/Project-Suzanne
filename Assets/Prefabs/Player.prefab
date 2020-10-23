@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1986577417306244506}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1986577418310541122}
+  sensitivity: 1
 --- !u!143 &1986577417306244507
 CharacterController:
   m_ObjectHideFlags: 0
@@ -79,6 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  sprintModifier: 1.5
+  stamina: 100
+  sprintRegen: 25
 --- !u!1 &1986577417953856101
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +96,7 @@ GameObject:
   - component: {fileID: 1986577417953856409}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

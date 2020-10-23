@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Authors: Lugrim
+//additional changes by Grant Guenter
 public class MazeGenerator : MonoBehaviour
 {
+
+    
     #region Variables
     [Header("Maze Variables")]
     [Range(3, 60)] public int columsCount = 3;
@@ -22,10 +26,21 @@ public class MazeGenerator : MonoBehaviour
     public Quaternion[] cellPrefabsRotations;
     public static List<Cell> grid = new List<Cell>();
 
+    [Header("Door Game Object")]
+    public GameObject doorObject;
+    List<GameObject> doorPrefabs = new List<GameObject>();
+
+    [Header("Key Game Object")]
+    public GameObject keyObj;
+    GameObject keyInstance;
+
 
     // Testing structures for generating maze with standard cells in order to correctly orient prefabs.
     // public CellType[] TESTCELLS;
     // public static List<Cell> TESTGRID = new List<Cell>();
+
+
+    List<KeyValuePair<int, int>> exits = new List<KeyValuePair<int, int>>();
 
     public static List<Cell> stack = new List<Cell>();
     public static List<Cell> correctPath = new List<Cell>();
@@ -40,6 +55,10 @@ public class MazeGenerator : MonoBehaviour
         grid = new List<Cell>();
         stack = new List<Cell>();
         correctPath = new List<Cell>();
+        for(int i = 0; i< exitsCount; i++)
+        {
+            doorPrefabs.Add(new GameObject());
+        }
         SetupGrid();
 
         do
@@ -49,7 +68,8 @@ public class MazeGenerator : MonoBehaviour
 
         MakeExits();
         SetupWalls();
-        
+        PlaceDoors();
+        PlaceKey();
        
     }
 
@@ -62,7 +82,11 @@ public class MazeGenerator : MonoBehaviour
         {
             grid[i].DestroyCell();
         }
-
+        foreach(GameObject obj in doorPrefabs)
+        {
+            Destroy(obj);
+        }
+        Destroy(keyInstance);
     }
 
     private void SetupGrid()
@@ -101,6 +125,7 @@ public class MazeGenerator : MonoBehaviour
             KeyValuePair<int, int> kvp = indexAndWallToRemove[UnityEngine.Random.Range(0, indexAndWallToRemove.Count)];
             grid[kvp.Key].walls[kvp.Value] = false;
             indexAndWallToRemove.Remove(kvp);
+            exits.Add(kvp);
         }
     }
 
@@ -179,6 +204,116 @@ public class MazeGenerator : MonoBehaviour
             b.walls[3] = false;
         }
     }
+
+    private Cell GetCell(int index)
+    {
+        return grid[index];
+    }
+
+    private void PlaceDoors()
+    {
+        for(int i = 0; i< exits.Count; i++)
+        {
+            PlaceDoor(GetCell(exits[i].Key), exits[i].Key, i);
+        }
+    }
+
+    private void PlaceDoor(Cell doorCell, int index, int exitInd)
+    {
+        float xOffset = 0;
+        float zOffset = 0;
+        int rotation = 0;
+        if(doorCell.x == 0 && doorCell.z == 0)
+        {
+            //Bottom Left
+            if(!doorCell.walls[0])
+            {
+                zOffset = -(0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = -(0.5f * cellSize);
+                rotation = 0;
+            }
+        }else
+        if (doorCell.x == cols-1 && doorCell.z == 0)
+        {
+            //Bottom Right
+            if (!doorCell.walls[0])
+            {
+                zOffset = -(0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = (0.5f * cellSize);
+                rotation = 90;
+            }
+        }else
+        if(doorCell.x == 0 && doorCell.z == rows-1)
+        {
+            //top left
+            if (!doorCell.walls[2])
+            {
+                zOffset = (0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = -(0.5f * cellSize);
+                rotation = 90;
+            }
+        }else
+        if (doorCell.x == cols-1 && doorCell.z == rows-1)
+        {
+            //top right
+            if (!doorCell.walls[2])
+            {
+                zOffset = (0.5f * cellSize);
+            }
+            else
+            {
+                xOffset = (0.5f * cellSize);
+                rotation = 90;
+            }
+        }else
+        if (doorCell.x == 0)
+        {   
+            //left edge
+            xOffset = -(0.5f * cellSize);
+            rotation = 90;
+        }else
+        if (doorCell.x == cols-1)
+        {   
+            //right edge
+            xOffset = (0.5f * cellSize);
+            rotation = 90;
+        }else
+        if (doorCell.z == 0)
+        {
+            //bottom edge
+            zOffset = -(0.5f * cellSize);
+        }
+        else
+        if (doorCell.z == rows-1)
+        {
+            //left edge
+            zOffset = (0.5f * cellSize);
+        }
+        Quaternion doorRotation = new Quaternion();
+        doorRotation.eulerAngles = new Vector3(0, rotation+90, 0);
+
+        doorPrefabs[exitInd] = Instantiate(doorObject, new Vector3(grid[index].x * cellSize+xOffset, 0, grid[index].z * cellSize+zOffset), doorRotation, transform);
+    }
+
+    public void PlaceKey()
+    {
+        float x = UnityEngine.Random.Range(1, cols * cellSize -1);
+        float z = UnityEngine.Random.Range(1, rows * cellSize -1);
+        Debug.Log(x + " " + z);
+        x -= cellSize / 2;
+        z -= cellSize / 2;
+        keyInstance = Instantiate(keyObj,new Vector3(x,2.5f,z), new Quaternion(), transform);
+    }
+
     #endregion
 }
 

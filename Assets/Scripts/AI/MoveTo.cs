@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Author: Grant Guenter
 public class MoveTo : MonoBehaviour
 {
     public Transform goal;

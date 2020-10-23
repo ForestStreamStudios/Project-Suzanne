@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 //Author: Grant Guenter
-public class DeathCollider : MonoBehaviour
+public class Door : MonoBehaviour
 {
     // Start is called before the first frame update
+    [Header ("Next Scene")]
+    public string sceneName;
+
     void Start()
     {
         
@@ -19,13 +22,13 @@ public class DeathCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Respawn"))
+        Debug.Log("door collided");
+        if (other.gameObject.CompareTag("Player") && KeyDoorManager.instance.keyPickedUp)
         {
             Cursor.lockState = UnityEngine.CursorLockMode.Confined;
             Cursor.visible = true;
-            SceneManager.LoadScene("Death Screen",LoadSceneMode.Single);
+            SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 
         }
     }
 }
-

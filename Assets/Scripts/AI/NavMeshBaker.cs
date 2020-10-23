@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 
+//Author: Grant Guenter
 public class NavMeshBaker : MonoBehaviour
 {
     /* USAGE:
