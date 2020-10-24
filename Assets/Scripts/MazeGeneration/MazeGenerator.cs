@@ -154,7 +154,7 @@ public class MazeGenerator : MonoBehaviour
             TESTGRID[i].prefab = Instantiate(prefabs2[UnityEngine.Random.Range(0, prefabs.Length)], new Vector3(grid[i].x * cellSize, 0, grid[i].z * cellSize), cellPrefabsRotations[n], transform);
             Debug.Log(n);*/
 
-            //Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
+            Debug.Log(n + " : " + prefabs[0].name + " " + cellPrefabsRotations[n].eulerAngles);
             int p = UnityEngine.Random.Range(0, prefabs.Length);
             grid[i].prefab = Instantiate(prefabs[p], new Vector3(grid[i].x*cellSize, 0, grid[i].z*cellSize), cellPrefabsRotations[n]*prefabs[p].transform.rotation, transform);
         }
