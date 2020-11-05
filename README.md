@@ -30,7 +30,7 @@ There is no currently passing build. To preview or modify the project, download 
 ### If you are not a part of Forest Stream Studios 
 * Fork the repository, make changes, and submit a pull request
 * Submit an issue
-* Join our team (link currently unavailable)
+* Join our team (https://discord.gg/cB777Db)
 ## Issues
 When submitting a new issue, make sure to follow these simple guidelines.
 * Ensure that the issue title is clear and concise.
