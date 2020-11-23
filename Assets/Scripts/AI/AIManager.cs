@@ -37,6 +37,7 @@ public class AIManager : MonoBehaviour
             Debug.LogError("Please set aiObjectName for " + this.gameObject.name);
         }
 
+
     }
 
     // Update is called once per frame
@@ -49,7 +50,12 @@ public class AIManager : MonoBehaviour
                 if (NavMesh.SamplePosition(Vector3.zero, out NavMeshHit hit, 1000.0f, NavMesh.AllAreas))
                 {
                     started = true;
-                    aiObject.transform.position = GetRandomPointAroundTarget(playerObject.transform.position);
+                    Vector3 newPos = GetRandomPointAroundTarget(playerObject.transform.position);
+                    newPos.y = aiObject.GetComponent<Collider>().bounds.size.y / 2; //Set Y to half the bound size. This assumes the origin is at the centre. May be replaced by a constant once Suzanne is ready.
+                    //Old code, breaks navigation
+                    //aiObject.transform.position = newPos;
+                    //New version uses NavMeshAgent
+                    aiObject.GetComponent<NavMeshAgent>().Warp(newPos);
                     MoveTarget();
                 }
             }
