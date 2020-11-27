@@ -5,20 +5,23 @@ using UnityEngine.AI;
 
 public class AIManager : MonoBehaviour
 {
-    public float updateTime = 5;
+    public float waitTimeDefault = 5;
     public string aiObjectName; //IMPORTANT!! This name will be used to search ai object and set speed.
-    public float targetSmallRadius = 10.0f, targetBigRadius= 30.0f; //Target distance to origin is between targetBigRadius + targetSmallRadius and targetBigRadius - targetSmallRadius
-    public float navigationDistance = 100.0f;   //Square of the distance to assume ai has reached its target. Current value is high, because the cube is really tall.
+    public float targetSmallRadiusDefault = 10.0f, targetBigRadiusDefault= 30.0f, radiusDecayRate = 2.0f; //Target distance to origin is between targetBigRadius + targetSmallRadius and targetBigRadius - targetSmallRadius. Decay rate makes the ring close on the player over time(TODO). 
+    public float navigationDistance = 5.0f;   //Square of the distance to assume ai has reached its target.
+    public float aiEyeHeight = 2.0f;           //Adds height to the position.
 
     private float time = 0.0f;
     private bool started = false;
     private GameObject playerObject;
-    private static GameObject aiObject;
+    private  GameObject aiObject;
+    private float targetSmallRadius , targetBigRadius;
     private enum aiStates {Chase, RoamPlayer};   //Add any new states here.
     private aiStates currentState = aiStates.RoamPlayer;
-    // Start is called before the first frame update
     void Start()
     {
+        targetBigRadius = targetBigRadiusDefault;
+        targetSmallRadius = targetSmallRadiusDefault;
         if (playerObject == null)
             playerObject = GameObject.Find("Player");
         if (playerObject == null)
@@ -45,6 +48,7 @@ public class AIManager : MonoBehaviour
     {
         if (aiObject != null)
         {
+            CheckPerception();
             if (!started)
             {
                 if (NavMesh.SamplePosition(Vector3.zero, out NavMeshHit hit, 1000.0f, NavMesh.AllAreas))
@@ -60,12 +64,14 @@ public class AIManager : MonoBehaviour
                 }
             }
             else if ((aiObject.transform.position - transform.position).sqrMagnitude < navigationDistance)
-            {
+            {   //Arrived at target:
                 time += Time.deltaTime;
-                if (time >= updateTime)
+                if (time >= waitTimeDefault)
                 {
                     MoveTarget();
                     time = 0.0f;
+                    waitTimeDefault = Mathf.Abs(Random.value) % 5.0f + 2.0f;
+                    //Could add search animation here.
                 }
             }
             
@@ -89,6 +95,32 @@ public class AIManager : MonoBehaviour
         }
     }
 
+    private void CheckPerception()
+    {
+        RaycastHit hit;
+        int layermask = 1 << 3; //Set up to ignore IgnoreRaycast layer. Change the shifting if layers change!!
+        layermask = ~layermask;
+        Ray ray = new Ray(playerObject.transform.position, new Vector3(aiObject.transform.position.x,aiObject.transform.position.y + aiEyeHeight, aiObject.transform.position.z) - playerObject.transform.position);
+        Debug.DrawRay(playerObject.transform.position, new Vector3(aiObject.transform.position.x, aiObject.transform.position.y + aiEyeHeight, aiObject.transform.position.z) - playerObject.transform.position, Color.green, 1.0f);
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layermask))
+        {
+            //Debug.Log(hit.collider.gameObject);
+            if(hit.collider.gameObject == aiObject)
+            {
+                SetStateToChase();
+            }
+            else
+            {
+                SetStateToRoamPlayer();
+            }
+        }
+        else
+        {
+            //No hit. Not possible, but just in case...
+            SetStateToChase();
+        }
+    }
+
     private Vector3 GetRandomPointAroundTarget(Vector3 origin)//Random point is within a torus, centred around the target and projected onto the NavMesh
     {
         NavMeshHit hit; //For NavMesh Projection
@@ -104,5 +136,28 @@ public class AIManager : MonoBehaviour
             return Vector3.zero;
     }
 
- 
+    
+    public void SetStateToChase()
+    {
+        if(currentState != aiStates.Chase)
+        {
+            currentState = aiStates.Chase;
+            MoveTarget();
+        }
+        else
+        {
+            MoveTarget();
+        }
+    }
+
+    public void SetStateToRoamPlayer()
+    {
+        if(currentState != aiStates.RoamPlayer)
+        {
+            //A search logic could be implemented here...
+            currentState = aiStates.RoamPlayer;
+
+        }
+        
+    }
 }
