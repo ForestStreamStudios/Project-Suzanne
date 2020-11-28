@@ -128,12 +128,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 968922966}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &50664682 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1986577417306244197, guid: bd2b2048988aca140af972653b362ec3,
-    type: 3}
-  m_PrefabInstance: {fileID: 968922966}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &50664683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,8 +906,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910576132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.75, y: 10.25, z: 62.95}
-  m_LocalScale: {x: 1, y: 15, z: 1}
+  m_LocalPosition: {x: 107.9, y: 38.3, z: 119.5}
+  m_LocalScale: {x: 1, y: 3.9282002, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -930,7 +924,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56d3a9fc968e36458beae71e5bf8d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goal: {fileID: 50664682}
+  goal: {fileID: 1960700835}
+--- !u!1 &1960700833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1960700835}
+  - component: {fileID: 1960700834}
+  m_Layer: 0
+  m_Name: AIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1960700834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960700833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b8ef27ac6bf686489fe22cae50f99ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimeDefault: 5
+  aiObjectName: Cube
+  targetSmallRadiusDefault: 10
+  targetBigRadiusDefault: 30
+  radiusDecayRate: 5
+  navigationDistance: 5
+  aiEyeHeight: 2
+--- !u!4 &1960700835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960700833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 58.68, y: 7.266827, z: 65.41542}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2004546587
 GameObject:
   m_ObjectHideFlags: 0
