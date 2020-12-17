@@ -8,7 +8,7 @@ public class Key : PickupObject
     protected override void PickUpEffect(GameObject obj)
     {
 
-        ((KeyDoorManager)KeyDoorManager.GetInstance()).SetKeyPickedUp(true);
+        KeyDoorManager.GetInstance().SetKeyPickedUp(true);
         
         if (!pickedup)
         {

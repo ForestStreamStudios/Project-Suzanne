@@ -4,9 +4,23 @@ using UnityEditor;
 using UnityEngine;
 
 //Author: Grant Guenter
-public class KeyDoorManager : Singleton
+public class KeyDoorManager 
 {
+    private static KeyDoorManager instance;
     public bool keyPickedUp;
+    private KeyDoorManager()
+    {
+        keyPickedUp = false;
+    }
+
+    public static KeyDoorManager GetInstance()
+    {
+        if (instance == null)
+        {
+            instance = new KeyDoorManager();
+        }
+        return instance;
+    }
     // Start is called before the first frame update
     public void SetKeyPickedUp(bool state)
     {
@@ -21,21 +35,5 @@ public class KeyDoorManager : Singleton
     void Update()
     {
         
-    }
-}
-
-public class Singleton:MonoBehaviour
-{
-    private static Singleton instance;
-    protected Singleton()
-    {
-    }
-    public static Singleton GetInstance()
-    {
-        if(instance == null)
-        {
-            instance = new Singleton();
-        }
-        return instance;
     }
 }
