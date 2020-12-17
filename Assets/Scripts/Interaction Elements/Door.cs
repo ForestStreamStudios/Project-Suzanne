@@ -23,7 +23,7 @@ public class Door : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("door collided");
-        if (other.gameObject.CompareTag("Player") && KeyDoorManager.instance.keyPickedUp)
+        if (other.gameObject.CompareTag("Player") && ((KeyDoorManager)KeyDoorManager.GetInstance()).keyPickedUp)
         {
             Cursor.lockState = UnityEngine.CursorLockMode.Confined;
             Cursor.visible = true;
