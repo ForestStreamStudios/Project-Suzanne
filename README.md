@@ -10,6 +10,8 @@ An open source community project aiming to build a game about mazes.
 
 You play as [REDACTED] and find yourself stuck in a room that appears to be trying to teach you something. Eventually you find your way out and discover that are in a maze. You must find your way through 3 different mazes to find yourself in a new room that both is an ending, and a beginning...
 
+You will need to download the models folder here:https://drive.google.com/file/d/1hJIIrkjIWEj95JM2v_BKZyllCMn_2ezy/view?usp=sharing
+Place it inside of the Assets folder, replacing all duplicate files.
 ## Installation/Setup
 ### From Source
 Follow the steps below to install and setup the project
