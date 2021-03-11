@@ -18,7 +18,7 @@ Follow the steps below to install and setup the project
 1. Clone the repository using `git clone https://github.com/ForestStreamStudios/Project-Suzanne/` or fork it.
 2. Open Unity
 3. Add the project to unity by clicking the "Add" button in the top right and then navigating to the folder that contains the project files. Select that folder.
-4. Verify that you have the correct unity version. This project is currently using version 2019.4.12f1. 
+4. Verify that you have the correct unity version. This project is currently using version 2019.4.22f1. 
     1. If you do not have the correct version installed, go to the "Installs" tab on the left and then click "Add".
 5. Open the project by clicking on it
 6. To open a scene, find the scenes folder within unity and double click on the scene you want to view.
